@@ -1,0 +1,6 @@
+{
+    "sketch": "pressureOled.ino",
+    "board": "arduino:avr:nano",
+    "port": "COM7",
+    "configuration": "cpu=atmega328"
+}
