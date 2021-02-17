@@ -1,11 +1,10 @@
+#include <DHT_U.h>
+#include <DHT.h>
+
 #include <U8g2lib.h>
 #include <U8x8lib.h>
-
 #include <SparkFun_LPS25HB_Arduino_Library.h>
-
 #include <Arduino.h>
-#include <U8g2lib.h>
-#include <SparkFun_LPS25HB_Arduino_Library.h>
 
 #ifdef U8X8_HAVE_HW_SPI
 #include <SPI.h>
@@ -13,6 +12,7 @@
 #ifdef U8X8_HAVE_HW_I2C
 #include <Wire.h>
 #endif
+
 U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C u8g2(U8G2_R0, /* reset=*/U8X8_PIN_NONE); // Adafruit ESP8266/32u4/ARM Boards + FeatherWing OLED
 // U8G2_SSD1306_128X32_UNIVISION_F_SW_I2C u8g2(U8G2_R0, /* clock=*/SCL, /* data=*/SDA, /* reset=*/U8X8_PIN_NONE); // Adafruit Feather ESP8266/32u4 Boards + FeatherWing OLED
 //U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);  // Adafruit ESP8266/32u4/ARM Boards + FeatherWing OLED
@@ -45,15 +45,16 @@ void setup(void)
 
 char pressure[64];
 char temp[64];
+float a = 1000.0;
 
 void loop(void)
 {
     float hpa = pressureSensor.getPressure_hPa();
     float tp = pressureSensor.getTemperature_degC();
 
-    Serial.print("Pressure in hPa: ");
+    //Serial.print("Pressure in hPa: ");
     Serial.print(pressureSensor.getPressure_hPa()); // Get the pressure reading in hPa
-    Serial.print(", Temperature (degC): ");
+    //Serial.print(", Temperature (degC): ");
     Serial.println(pressureSensor.getTemperature_degC()); // Get the temperature in degrees C
 
     String str = String(hpa);
@@ -64,14 +65,16 @@ void loop(void)
 
     // delay(40); // Wait - 40 ms corresponds to the maximum update rate of the sensor (25 Hz)
 
-    u8g2.clearBuffer();                 // clear the internal memory
-    u8g2.setFont(u8g2_font_ncenB08_tr); // choose a suitable font
-    u8g2.drawStr(0, 10, "pre:");        // write something to the internal memory
-    u8g2.drawStr(25, 10, pressure);     // write something to the internal memory
-    u8g2.drawStr(55, 10, " hpa");       // write something to the internal memory
-    u8g2.drawStr(0, 25, "tmp: ");       // write something to the internal memory
-    u8g2.drawStr(25, 25, temp);         // write something to the internal memory
-    u8g2.drawStr(55, 25, " C");         // write something to the internal memory
-    u8g2.sendBuffer();                  // transfer internal memory to the display
+    u8g2.clearBuffer();                           // clear the internal memory
+    u8g2.setFont(u8g2_font_ncenB08_tr);           // choose a suitable font
+    u8g2.drawStr(0, 10, "pre:");                  // write something to the internal memory
+    u8g2.drawStr(25, 10, pressure);               // write something to the internal memory
+    u8g2.drawStr(55, 10, " hpa");                 // write something to the internal memory
+    u8g2.drawStr(0, 20, "tmp: ");                 // write something to the internal memory
+    u8g2.drawStr(25, 20, temp);                   // write something to the internal memory
+    u8g2.drawStr(55, 20, " C");                   // write something to the internal memory
+    u8g2.drawStr(0, 30, "Mini Pre Sensor Vol.1"); // write something to the internal memory
+    u8g2.sendBuffer();                            // transfer internal memory to the display
+
     delay(1000);
 }
