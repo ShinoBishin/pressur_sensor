@@ -3,6 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
+                "D:\\data1\\Arduino\\libraries\\MsTimer2",
                 "D:\\data1\\Arduino\\libraries\\DHT_sensor_library",
                 "D:\\data1\\Arduino\\libraries\\U8g2\\src",
                 "D:\\data1\\Arduino\\libraries\\SparkFun_LPS25HB_Pressure_Sensor_Library\\src",
