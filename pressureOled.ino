@@ -35,7 +35,7 @@ float tp;
 void loop(void)
 {
     hpa = pressureSensor.getPressure_hPa();
-    tp = pressureSensor.getTemperature_degC();
+    tp = pressureSensor.getTemperature_degC() - 4.0;
 
     // Serial.print(hpa);
     // Serial.print(", ");
